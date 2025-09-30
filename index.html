@@ -1,108 +1,61 @@
 <!DOCTYPE html>
 <html lang="de">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meine Webseite</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  </head>
-  <body>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">Meine Webseite</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link active" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Über</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Kontakt</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-
-      <div class="container mt-4">
-        <div class="row">
-          
-          <div class="col-md-4">
-            <img src="bild.jpg" class="img-fluid" alt="Charakterbild">
-          </div>
-      
-          
-          <div class="col-md-6">
-            <h2>Hallo, ich bin ein niedlicher Charakter!</h2>
-            <p>Ich bin ein kleiner, fröhlicher Charakter, der ein freundliches Wesen ausstrahlt...</p>
-          </div>
-        </div>
-      </div>
-      <div class="container mt-4">
-        <div class="row">
-          
-
-          <div class="col-md-4">
-      <div class="card">
-        <div class="card-header">
-          Quote
-        </div>
-        <div class="card-body">
-          <figure>
-            <blockquote class="blockquote">
-              <p>
-                Ich denke, also bin ich.</p>
-            </blockquote>
-            <figcaption class="blockquote-footer">
-              René Descartes
-            </figcaption>
-          </figure>
-        </div>
-        
-
-      </div>
-
-    </div>
-
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eis Auswahl</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script>
+      function berechnePreis() {
+    var vMenge = document.getElementById("anzahlKugeln").value;
+    var vPreis = document.getElementById("eisSorte").value;
+    var ausgabeElement = document.getElementById("idausgabe");
+    var vErgebnis = 0;
     
-    <div class="col-md-6">
-      <div class="card" style="width: 18rem;">
-        <img src="zitat.jpg" class="card-img-top" style="width: 100%;" alt="...">
-        <div class="card-body">
-          <p class="card-text">René Descartes war ein französischer Philosoph, Mathematiker und Naturwissenschaftler.</p>
-          <button type="button" class="btn btn-secondary btn-lg" >Wikipedia</button>
-        </div>
-    
-        
-        </div>
-      </div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="container mt-2">
-  <div class="row">
-<div class="col-md-4">
-  <div class="card">
-    <div class="card-header">
-      Quote
-    </div>
-    <div class="card-body">
-      <figure>
-        <blockquote class="blockquote">
-          <p>Alles was lediglich wahrscheinlich ist, ist wahrscheinlich falsch.</p>
-        </blockquote>
-        <figcaption class="blockquote-footer">
-          René Descartes
-        </figcaption>
-      </figure>
-    </div>
+    if (vPreis == "Premiumeis") {
+        vErgebnis = vMenge * 2.5; 
+    } if (vPreis == "Exclusiveis") {
+      vErgebnis = vMenge * 3.5;
+    }
+    if (vPreis == "Mastereis") {
+      vErgebnis = vMenge * 4.5;
+    } 
+
+    ausgabeElement.innerHTML = "Der Gesamtpreis für " + vMenge + " Kugel" + " von " + vPreis + " beträgt " + vErgebnis.toFixed(2) + " €";
   
-  </body>
+}
+  </script>
+</head>
+<body>
+  <div class="container mt-5">
+    <h1 class="text-center mb-4">Eis Auswahl</h1>
+    <form>
+      <div class="mb-3">
+        <label for="eisSorte" class="form-label">Wählen Sie Ihre Eissorte:</label>
+        <select id="eisSorte" class="form-select">
+          <option value="Premiumeis" >Premiumeis - 2.50 € pro Kugel</option>
+          <option value="Exclusiveis" >Exclusiveis - 3.50 € pro Kugel</option>
+          <option value="Mastereis">Mastereis - 4,50€ pro Kugel</option>
+        </select>
+      </div>
+      
+      <div class="mb-3">
+        <label for="anzahlKugeln" class="form-label">Anzahl der Kugeln:</label>
+        <input type="number" class="form-control" id="anzahlKugeln" value="1" min="1">
+      </div>
+      
+      <!-- Button zum Berechnen des Preises -->
+      <button type="button" class="btn btn-primary" onclick="berechnePreis()">Berechnen</button>
+      
+      <!-- Anzeige des Gesamtpreises -->
+      <h3 id="idausgabe" class="text-center mt-3"></h3>
+    </form>
+  </div>
+  
+
+  <!-- Bootstrap JS und Popper.js -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+</body>
 </html>
